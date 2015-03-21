@@ -5,9 +5,11 @@
 (declare prime-numbers)
 
 (defn prime?
+  "Test if the number N is prime."
   [n]
-  (not (some #(zero? (mod n %))
-             (take-while #(<= (* % %) n) prime-numbers))))
+  (and (> n 1)
+       (not (some #(zero? (mod n %))
+                  (take-while #(<= (* % %) n) prime-numbers)))))
 
 (def prime-numbers
   "A lazy, infinite sequence of prime numbers."

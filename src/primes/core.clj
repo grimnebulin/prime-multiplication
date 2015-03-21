@@ -41,7 +41,7 @@
         widths (cons (greatest-width nums) (map greatest-width table))
         fmt    (join " | " (map #(str "%" % "s") widths))]
     (println (apply format fmt "" nums))
-    (println (join "-+-" (map #(join (repeat % "-")) widths)))
+    (println (join "-+-" (map #(String. (char-array % \-)) widths)))
     (doseq [row (map cons nums table)]
       (println (apply format fmt row)))))
 

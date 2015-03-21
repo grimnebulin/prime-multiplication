@@ -2,12 +2,16 @@
   (:gen-class)
   (:require [clojure.string :refer [join]]))
 
+(declare prime-numbers)
+
+(defn prime?
+  [n]
+  (not (some #(zero? (mod n %))
+             (take-while #(<= (* % %) n) prime-numbers))))
+
 (def prime-numbers
   "A lazy, infinite sequence of prime numbers."
-  (let [prime (fn [n]
-                (not (some #(zero? (mod n %))
-                           (take-while #(<= (* % %) n) prime-numbers))))]
-    (cons 2 (filter prime (iterate #(+ 2 %) 3)))))
+  (cons 2 (filter prime? (iterate #(+ 2 %) 3))))
 
 (defn make-multiplication-table
   "Constructs a square vector-of-vectors representing a multiplication

@@ -27,7 +27,9 @@
       (is (= [[1 2] [2 4]]
              (make-multiplication-table [1 2])))
       (is (= [[4 20 16] [20 100 80] [16 80 64]]
-             (make-multiplication-table [2 10 8]))))
+             (make-multiplication-table [2 10 8])))
+      (is (= [[1]]
+             (make-multiplication-table [-1]))))
     (testing "Multiplication table output"
       (is (= (str "  | 1\n"
                   "--+--\n"
@@ -38,7 +40,12 @@
                   " 3 |  9 |  6 |  30\n"
                   " 2 |  6 |  4 |  20\n"
                   "10 | 30 | 20 | 100\n")
-             (with-out-str (print-multiplication-table [3 2 10])))))))
+             (with-out-str (print-multiplication-table [3 2 10]))))
+      (print-multiplication-table [-1])
+      (is (= (str "   | -1\n"
+                  "---+---\n"
+                  "-1 |  1\n")
+             (with-out-str (print-multiplication-table [-1])))))))
 
 (deftest number-format-test
   (testing "Number formatting routines"

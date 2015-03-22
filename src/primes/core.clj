@@ -43,7 +43,8 @@
   the horizontal and vertical axes."
   [nums]
   (let [table  (make-multiplication-table nums)
-        widths (cons (greatest-width nums) (map greatest-width table))
+        widths (cons (greatest-width nums)
+                     (map greatest-width (map cons nums table)))
         fmt    (join " | " (map #(str "%" % "s") widths))]
     (println (apply format fmt "" nums))
     (println (join "-+-" (map #(String. (char-array % \-)) widths)))

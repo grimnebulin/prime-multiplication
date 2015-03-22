@@ -22,12 +22,15 @@
   (vec (map (fn [y] (vec (map (fn [x] (* x y)) nums))) nums)))
 
 (defn num-width
-  "Computes the number of digits in the base-10 representation of the
-  number NUM."
+  "Computes the number of characters in the base-10 representation of
+  the number NUM."
   [num]
-  (if (< num 10)
-    1
-    (inc (num-width (/ num 10)))))
+  (if (neg? num)
+    (inc (num-width (- num)))
+    (loop [num num len 1]
+      (if (< num 10)
+        len
+        (recur (/ num 10) (inc len))))))
 
 (defn greatest-width
   "Of all of the numbers of digits in all of the numbers in NUMS,
